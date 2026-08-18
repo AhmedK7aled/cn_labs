@@ -1,0 +1,467 @@
+/* ============================================================
+   CN Labs — wire the theory
+   نظام التصميم: لوحة الألوان الرسمية الأربعة فقط
+   teal #18706D · mustard #E9C46A · coral #E76F51 · cream #FDF0D5
+   ============================================================ */
+
+:root {
+  --teal: #18706D;        /* أساسي: عناوين، روابط، أزرار */
+  --teal-ink: #0E3F3D;    /* درجة داكنة لنص القراءة */
+  --teal-deep: #0B3230;   /* خلفية الطرفية */
+  --teal-soft: rgba(24, 112, 109, .35);
+  --mustard: #E9C46A;     /* تمييز، حالات نشطة */
+  --mustard-ink: #B08A1E; /* درجة داكنة من الذهبي للنصوص */
+  --coral: #E76F51;       /* تحذيرات، مصطلحات مفتاحية */
+  --cream: #FDF0D5;       /* خلفية الموقع */
+  --card: #FFFDF7;        /* خلفية البطاقات */
+  --radius: 16px;
+  --shadow: 0 2px 10px rgba(24, 112, 109, .10);
+  --shadow-lg: 0 10px 30px rgba(14, 63, 61, .16);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 120px;
+}
+
+body {
+  font-family: "Tajawal", "Segoe UI", Tahoma, Arial, sans-serif;
+  background: var(--cream);
+  color: var(--teal-ink);
+  font-size: 17px;
+  line-height: 1.85;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--mustard); color: var(--teal-ink) }
+
+/* ---------- شريط تقدم القراءة العلوي ---------- */
+#progress {
+  position: fixed; top: 0; right: 0;
+  height: 5px; width: 0%;
+  background: var(--mustard);
+  z-index: 1100;
+  transition: width .15s linear;
+}
+
+/* ---------- الهيدر الثابت ---------- */
+header.site {
+  position: sticky; top: 0; z-index: 1000;
+  background: var(--cream);
+  border-bottom: 3px solid var(--teal);
+  padding: 10px 20px;
+  display: flex; align-items: center; gap: 14px;
+}
+header.site .logo { width: 46px; height: 46px; flex: 0 0 auto }
+.brand h1 { font-size: 1.25rem; color: var(--teal); letter-spacing: .5px; line-height: 1.2 }
+.brand .tag {
+  font-size: .8rem; color: var(--coral); font-weight: 700;
+  letter-spacing: 2px; direction: ltr; text-align: right;
+}
+header.site .spacer { flex: 1 }
+
+.btn {
+  display: inline-block; border: none; cursor: pointer; font-family: inherit;
+  background: var(--teal); color: var(--cream);
+  padding: 9px 18px; border-radius: 999px;
+  font-size: .95rem; font-weight: 700;
+  transition: background .2s, transform .15s;
+}
+.btn:hover { background: var(--teal-ink) }
+.btn:active { transform: scale(.97) }
+.btn.ghost { background: transparent; color: var(--teal); border: 2px solid var(--teal) }
+.btn.ghost:hover { background: var(--teal); color: var(--cream) }
+.btn.gold { background: var(--mustard); color: var(--teal-ink); border: 2px solid var(--teal) }
+.btn.gold:hover { background: var(--teal); color: var(--cream) }
+
+/* ---------- الحاوية العامة ---------- */
+.wrap { max-width: 940px; margin: 0 auto; padding: 24px 18px 90px }
+
+/* ---------- بطاقة البطل (Hero) ---------- */
+.hero {
+  background: var(--teal); color: var(--cream);
+  border-radius: var(--radius);
+  padding: 46px 30px 40px;
+  margin: 26px 0 10px;
+  position: relative; overflow: hidden; text-align: center;
+}
+.hero .logo-big { width: 108px; height: 108px; margin: 0 auto 14px; display: block }
+.hero h2 { font-size: 2rem; color: #fff; margin-bottom: 4px; letter-spacing: .5px }
+.hero .tag-en { color: var(--mustard); font-weight: 700; letter-spacing: 3px; direction: ltr }
+.hero p { max-width: 660px; margin: 14px auto 0; color: var(--cream) }
+.hero .badges { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center }
+.hero .badges span {
+  background: rgba(253, 240, 213, .14);
+  border: 1px solid var(--mustard);
+  color: var(--cream); border-radius: 999px;
+  padding: 4px 14px; font-size: .85rem;
+}
+.hero .hero-cta { margin-top: 22px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap }
+
+/* ---------- خريطة المحتوى ---------- */
+.toc {
+  background: var(--card);
+  border: 2px solid var(--teal);
+  border-radius: var(--radius);
+  padding: 22px; margin: 22px 0;
+  box-shadow: var(--shadow);
+}
+.toc h3 { color: var(--teal); margin-bottom: 12px; font-size: 1.15rem }
+.toc ol {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 8px;
+}
+.toc a {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none; color: var(--teal-ink);
+  background: var(--cream);
+  border: 1.5px solid var(--teal);
+  border-radius: 12px; padding: 9px 12px;
+  font-weight: 700; font-size: .95rem;
+  transition: background .2s, color .2s;
+}
+.toc a:hover { background: var(--teal); color: var(--cream) }
+.toc a .num {
+  background: var(--mustard); color: var(--teal-ink);
+  border-radius: 8px; min-width: 30px; height: 30px;
+  display: grid; place-items: center; font-weight: 800; flex: 0 0 auto;
+}
+.toc a small { font-weight: 500; opacity: .75; margin-right: auto; font-size: .78rem }
+.toc a:hover small { opacity: 1 }
+
+/* ---------- فواصل الأقسام ---------- */
+.section-opener {
+  background: var(--teal); color: var(--cream);
+  border-radius: var(--radius);
+  padding: 34px 26px;
+  margin: 56px 0 26px;
+  position: relative; overflow: hidden;
+}
+.section-opener .wm { position: absolute; left: -30px; bottom: -30px; width: 180px; height: 180px; opacity: .12 }
+.section-opener .kicker { color: var(--mustard); font-weight: 800; letter-spacing: 1px; font-size: .9rem }
+.section-opener h2 { font-size: 1.7rem; color: #fff; margin: 6px 0 }
+.section-opener .en-sub { color: var(--mustard); direction: ltr; text-align: right; font-weight: 700; font-size: 1rem }
+.section-opener p { max-width: 720px; margin-top: 10px }
+.section-opener .meta { margin-top: 14px; display: inline-block; background: rgba(253,240,213,.14); border: 1px solid var(--mustard); border-radius: 999px; padding: 3px 14px; font-size: .82rem; font-weight: 700 }
+
+/* ---------- البطاقات التعليمية ---------- */
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  border: 1.5px solid var(--teal-soft);
+  border-right: 6px solid var(--teal);
+  padding: 26px 24px;
+  margin: 22px 0;
+  box-shadow: var(--shadow);
+}
+.card.warn { border-right-color: var(--coral) }
+.card.hl { border-right-color: var(--mustard) }
+.card h3 {
+  color: var(--teal); font-size: 1.3rem;
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 10px; line-height: 1.4;
+}
+.card h3 .badge {
+  background: var(--teal); color: var(--cream);
+  border-radius: 10px; min-width: 34px; height: 34px;
+  display: inline-grid; place-items: center;
+  font-size: 1rem; flex: 0 0 auto;
+}
+.card.warn h3 .badge { background: var(--coral) }
+.card.hl h3 .badge { background: var(--mustard); color: var(--teal-ink) }
+.card h4 { color: var(--teal); font-size: 1.08rem; margin: 18px 0 8px }
+.card p { margin: 8px 0 }
+.card ul, .card ol { margin: 8px 22px 8px 0 }
+.card li { margin: 6px 0 }
+
+.en {
+  font-family: Consolas, "Courier New", monospace;
+  direction: ltr; unicode-bidi: embed;
+  color: var(--teal); font-weight: 700;
+  overflow-wrap: break-word;
+}
+.key { color: var(--coral); font-weight: 800 }
+
+.note {
+  background: rgba(233, 196, 106, .28);
+  border: 1.5px solid var(--mustard);
+  border-radius: 12px; padding: 12px 16px; margin: 14px 0;
+}
+.note.alert { background: rgba(231, 111, 81, .12); border-color: var(--coral) }
+.note b { color: var(--teal) }
+.note.alert b { color: var(--coral) }
+
+.steps { counter-reset: st; list-style: none; margin: 12px 0 }
+.steps > li {
+  counter-increment: st;
+  position: relative;
+  padding: 12px 60px 12px 14px;
+  margin: 10px 0;
+  background: var(--cream);
+  border-radius: 12px;
+  border: 1.5px dashed rgba(24, 112, 109, .45);
+}
+.steps > li::before {
+  content: counter(st);
+  position: absolute; right: 12px; top: 12px;
+  width: 34px; height: 34px; border-radius: 50%;
+  background: var(--teal); color: var(--cream);
+  display: grid; place-items: center; font-weight: 800;
+}
+
+.mini-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 12px; margin: 12px 0;
+}
+.mini { background: var(--cream); border: 1.5px solid var(--teal); border-radius: 12px; padding: 14px }
+.mini h5 { color: var(--coral); font-size: 1rem; margin-bottom: 4px }
+
+/* ---------- الجداول ---------- */
+.tbl-wrap {
+  overflow-x: auto; margin: 14px 0;
+  border-radius: 12px; border: 1.5px solid var(--teal);
+}
+table { width: 100%; border-collapse: collapse; background: var(--card); font-size: .98rem }
+th { background: var(--teal); color: var(--cream); padding: 10px 12px; text-align: right; font-size: .95rem; white-space: nowrap }
+td { padding: 9px 12px; border-top: 1px solid rgba(24, 112, 109, .25); vertical-align: top }
+tr:nth-child(even) td { background: rgba(253, 240, 213, .55) }
+td .en { color: var(--teal) }
+
+/* ---------- الطرفية التفاعلية CLI (مقتبس من labs-sci) ---------- */
+.term {
+  background: var(--teal-deep);
+  border-radius: 14px; margin: 16px 0;
+  overflow: hidden; border: 2px solid var(--teal);
+  direction: ltr; text-align: left;
+}
+.term-bar {
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(253, 240, 213, .08);
+  padding: 8px 14px;
+  border-bottom: 1px solid rgba(253, 240, 213, .18);
+}
+.term-bar .dot { width: 11px; height: 11px; border-radius: 50% }
+.term-bar .dot:nth-child(1) { background: var(--coral) }
+.term-bar .dot:nth-child(2) { background: var(--mustard) }
+.term-bar .dot:nth-child(3) { background: var(--teal) }
+.term-bar .t-title { color: var(--cream); font-family: Consolas, monospace; font-size: .85rem; margin-left: auto; opacity: .85 }
+.term-body {
+  padding: 16px 18px;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: .95rem; line-height: 1.75; min-height: 40px;
+}
+.tl { white-space: pre-wrap; word-break: break-word; color: #FDF0D5 }
+.tl .p { color: var(--mustard); font-weight: 700 }
+.tl .c { color: #fff }
+.tl .cm { color: rgba(233, 196, 106, .75); font-style: italic }
+.tl.out { color: rgba(253, 240, 213, .85); display: none }
+.tl.out .ok { color: var(--mustard); font-weight: 700 }
+.tl.out .err { color: var(--coral); font-weight: 700 }
+.tl.out .up { color: var(--mustard); font-weight: 800; background: rgba(233, 196, 106, .15); padding: 0 4px; border-radius: 4px }
+.term-foot { display: flex; gap: 10px; padding: 10px 14px; border-top: 1px solid rgba(253, 240, 213, .15); flex-wrap: wrap }
+.run-btn {
+  background: var(--teal); color: var(--cream);
+  border: 2px solid var(--mustard); border-radius: 999px;
+  padding: 6px 22px; font-family: inherit; font-weight: 800; font-size: .9rem;
+  cursor: pointer; transition: background .2s;
+}
+.run-btn:hover:not(:disabled) { background: var(--mustard); color: var(--teal-ink) }
+.run-btn:disabled { opacity: .55; cursor: default }
+.copy-btn {
+  background: transparent; color: var(--cream);
+  border: 1.5px solid rgba(253, 240, 213, .5);
+  border-radius: 999px; padding: 6px 16px;
+  font-family: inherit; font-size: .85rem; cursor: pointer;
+}
+.copy-btn:hover { border-color: var(--mustard); color: var(--mustard) }
+.caret {
+  display: inline-block; width: 8px; height: 1em;
+  background: var(--mustard); vertical-align: -2px;
+  animation: blink 1s steps(1) infinite;
+}
+@keyframes blink { 50% { opacity: 0 } }
+
+/* ---------- رسومات SVG ---------- */
+.figure {
+  background: var(--cream);
+  border: 1.5px dashed var(--teal);
+  border-radius: 14px; padding: 16px;
+  margin: 16px 0; text-align: center; direction: ltr;
+}
+.figure svg { max-width: 100%; height: auto }
+.figure figcaption { margin-top: 8px; font-size: .9rem; color: var(--teal); font-weight: 700; direction: rtl }
+
+/* ---------- الاختبار التفاعلي ---------- */
+.quiz .q { margin: 18px 0; padding: 16px; background: var(--cream); border-radius: 12px; border: 1.5px solid var(--teal) }
+.quiz .q p { font-weight: 800; color: var(--teal); margin-bottom: 10px }
+.quiz .opt {
+  display: block; width: 100%; text-align: right;
+  margin: 8px 0; padding: 11px 16px;
+  background: var(--card);
+  border: 2px solid rgba(24, 112, 109, .4);
+  border-radius: 10px; font-family: inherit; font-size: 1rem;
+  cursor: pointer; color: var(--teal-ink); transition: all .2s;
+}
+.quiz .opt:hover { border-color: var(--teal) }
+.quiz .opt.correct { background: var(--teal); color: var(--cream); border-color: var(--teal) }
+.quiz .opt.wrong { background: rgba(231, 111, 81, .15); border-color: var(--coral); color: var(--coral) }
+.quiz .opt.correct .en, .quiz .opt.wrong .en { color: inherit }
+.quiz .fb { display: none; margin-top: 8px; font-weight: 700 }
+.quiz .fb.show { display: block }
+.quiz .fb.good { color: var(--teal) }
+.quiz .fb.bad { color: var(--coral) }
+.quiz-score {
+  margin-top: 16px; padding: 12px 16px; border-radius: 12px;
+  background: rgba(233,196,106,.28); border: 1.5px solid var(--mustard);
+  font-weight: 800; color: var(--teal); text-align: center; display: none;
+}
+.quiz-score.show { display: block }
+
+/* ---------- جدول التدريب (كشف الإجابة) ---------- */
+.drill td.ans {
+  color: transparent;
+  text-shadow: 0 0 9px rgba(24, 112, 109, .6);
+  cursor: pointer; user-select: none; transition: all .25s;
+}
+.drill td.ans.revealed { color: var(--teal); text-shadow: none; font-weight: 800 }
+.drill-hint { font-size: .88rem; color: var(--coral); font-weight: 700 }
+
+/* ---------- عناصر متفرقة ---------- */
+.connector {
+  display: flex; align-items: center; justify-content: center;
+  gap: 10px; color: var(--teal); font-weight: 700;
+  margin: 4px 0; font-size: .9rem; text-align: center;
+}
+.connector::before, .connector::after {
+  content: ""; height: 2px; flex: 1;
+  background: repeating-linear-gradient(90deg, var(--teal) 0 8px, transparent 8px 16px);
+}
+
+#toTop {
+  position: fixed; bottom: 22px; left: 22px;
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--teal); color: var(--cream);
+  border: 2px solid var(--mustard);
+  font-size: 1.3rem; cursor: pointer;
+  display: none; z-index: 999; box-shadow: var(--shadow);
+}
+#toTop.show { display: grid; place-items: center }
+
+footer.site { background: var(--teal); color: var(--cream); text-align: center; padding: 36px 20px; margin-top: 60px }
+footer.site .flogo { width: 64px; height: 64px; background: var(--cream); border-radius: 50%; padding: 8px; margin: 0 auto 10px }
+footer.site .tag-en { color: var(--mustard); letter-spacing: 3px; font-weight: 800; direction: ltr }
+footer.site p { font-size: .9rem; opacity: .9; margin-top: 8px }
+
+/* ظهور هادئ عند التمرير (يحترم تقليل الحركة) */
+.card, .section-opener { opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease }
+.card.in, .section-opener.in { opacity: 1; transform: none }
+
+/* ============================================================
+   وضع التركيز (Focus Mode) — تنقل خطي بين البطاقات
+   ============================================================ */
+body.focus { overflow-x: hidden }
+body.focus .wrap > *:not(.focus-active) { display: none !important }
+body.focus .wrap > .focus-active {
+  display: block;
+  opacity: 1; transform: none;
+  margin-top: 30px;
+  animation: focusIn .35s ease;
+  box-shadow: var(--shadow-lg);
+}
+body.focus .wrap > .section-opener.focus-active { margin-top: 30px }
+@keyframes focusIn { from { opacity: 0; transform: translateY(16px) } to { opacity: 1; transform: none } }
+
+/* أزرار التنقل داخل كل بطاقة (تظهر في وضع التركيز فقط) */
+.focus-nav { display: none }
+body.focus .focus-nav {
+  display: flex; align-items: center; gap: 10px;
+  margin-top: 22px; padding-top: 16px;
+  border-top: 1.5px dashed rgba(24, 112, 109, .4);
+}
+.section-opener .focus-nav { border-top-color: rgba(253, 240, 213, .35) }
+.focus-nav .fbtn {
+  border: none; cursor: pointer; font-family: inherit;
+  background: var(--teal); color: var(--cream);
+  padding: 9px 20px; border-radius: 999px;
+  font-size: .95rem; font-weight: 800;
+  transition: background .2s, transform .15s;
+}
+.focus-nav .fbtn:hover:not(:disabled) { background: var(--teal-ink) }
+.focus-nav .fbtn:active:not(:disabled) { transform: scale(.97) }
+.focus-nav .fbtn:disabled { opacity: .4; cursor: default }
+.focus-nav .fbtn.prev { background: transparent; color: var(--teal); border: 2px solid var(--teal) }
+.focus-nav .fbtn.prev:hover:not(:disabled) { background: var(--teal); color: var(--cream) }
+.section-opener .focus-nav .fbtn { background: var(--mustard); color: var(--teal-ink) }
+.section-opener .focus-nav .fbtn:hover:not(:disabled) { background: var(--cream) }
+.section-opener .focus-nav .fbtn.prev { background: transparent; color: var(--cream); border: 2px solid var(--cream) }
+.section-opener .focus-nav .fbtn.prev:hover:not(:disabled) { background: rgba(253,240,213,.2) }
+.focus-nav .fpos { margin-right: auto; font-weight: 800; color: var(--teal); font-size: .9rem }
+.section-opener .focus-nav .fpos { color: var(--mustard) }
+
+/* الشريط السفلي الثابت لوضع التركيز */
+.focus-bar {
+  position: fixed; bottom: 0; right: 0; left: 0;
+  z-index: 1050; display: none;
+  background: var(--card);
+  border-top: 3px solid var(--teal);
+  box-shadow: 0 -6px 24px rgba(14, 63, 61, .18);
+  padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
+}
+body.focus .focus-bar { display: block }
+.focus-bar .fb-row { max-width: 940px; margin: 0 auto; display: flex; align-items: center; gap: 12px; flex-wrap: wrap }
+.focus-bar .fcounter { font-weight: 800; color: var(--teal); font-size: .95rem; white-space: nowrap }
+.focus-bar .ftrack {
+  flex: 1; min-width: 140px; height: 12px;
+  background: var(--cream);
+  border: 1.5px solid var(--teal);
+  border-radius: 999px; overflow: hidden;
+}
+.focus-bar .ffill {
+  height: 100%; width: 0%;
+  background: repeating-linear-gradient(-45deg, var(--mustard) 0 10px, #DFAF45 10px 20px);
+  border-radius: 999px;
+  transition: width .35s ease;
+}
+.focus-bar .fpct { font-weight: 800; color: var(--mustard-ink); font-size: .9rem; min-width: 44px; text-align: center }
+.focus-bar .fexit {
+  border: 2px solid var(--coral); background: transparent; color: var(--coral);
+  border-radius: 999px; padding: 6px 16px;
+  font-family: inherit; font-weight: 800; font-size: .88rem; cursor: pointer;
+  transition: all .2s;
+}
+.focus-bar .fexit:hover { background: var(--coral); color: var(--cream) }
+body.focus .wrap { padding-bottom: 150px }
+body.focus #toTop { display: none !important }
+body.focus footer.site { display: none !important }
+
+/* ---------- تقليل الحركة ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .card, .section-opener { opacity: 1; transform: none; transition: none }
+  html { scroll-behavior: auto }
+  .caret { animation: none }
+  body.focus .wrap > .focus-active { animation: none }
+}
+
+/* ---------- التجاوب مع الشاشات ---------- */
+@media (max-width: 640px) {
+  body { font-size: 16px }
+  .hero h2 { font-size: 1.5rem }
+  .section-opener h2 { font-size: 1.35rem }
+  header.site { padding: 8px 12px }
+  .brand h1 { font-size: 1.05rem }
+  .brand .tag { font-size: .68rem }
+  header.site .logo { width: 38px; height: 38px }
+  .btn { padding: 8px 14px; font-size: .88rem }
+  .wrap { padding: 16px 12px 90px }
+  .card { padding: 20px 16px }
+  .card h3 { font-size: 1.15rem }
+  .term-body { font-size: .85rem; padding: 12px }
+  .focus-bar .fexit { padding: 6px 12px }
+  table { font-size: .85rem }
+  th, td { padding: 7px 9px }
+}
